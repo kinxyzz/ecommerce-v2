@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import React from "react";
 
 const dataLink = [
   {
@@ -23,7 +26,19 @@ const dataLink = [
   },
 ];
 
-export default function NavLink({ hideLarge }: { hideLarge?: boolean }) {
+export default function NavLink({
+  hideLarge,
+  setMounted,
+  mounted,
+}: {
+  hideLarge?: boolean;
+  setMounted?: React.Dispatch<React.SetStateAction<boolean>>;
+  mounted?: boolean;
+}) {
+  function handleClose() {
+    if (setMounted) setMounted(false);
+  }
+
   return (
     <ul
       className={`${
@@ -33,25 +48,26 @@ export default function NavLink({ hideLarge }: { hideLarge?: boolean }) {
       }`}
     >
       {dataLink.map((link) => (
-        <Link
-          href={link.url}
+        <li
           className={`${
             hideLarge
               ? "w-full flex justify-center items-center rounded-sm h-12 border hover:bg-primary hover:text-white"
               : ""
           }`}
           key={link.name}
+          onClick={handleClose}
         >
-          <p
-            className={`block leading-7 ${
+          <Link
+            href={link.url}
+            className={`block w-full text-center leading-7 ${
               hideLarge
                 ? ""
                 : "[&:not(:first-child)]:mt-6 underline-offset-4 hover:underline"
             } font-semibold text-sm duration-300 transition-all ease-in`}
           >
             {link.name}
-          </p>
-        </Link>
+          </Link>
+        </li>
       ))}
     </ul>
   );
