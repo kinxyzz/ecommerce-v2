@@ -35,6 +35,9 @@ const formSchema = z.object({
   password: z.string().min(6, {
     message: "Password must be at least 6 characters.",
   }),
+  confirmPassword: z.string().min(6, {
+    message: "Password must be at least 6 characters.",
+  }),
 });
 
 export default function RegisterForm() {
@@ -42,6 +45,7 @@ export default function RegisterForm() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       username: "",
+      confirmPassword: "",
       password: "",
       email: "",
     },
@@ -110,6 +114,24 @@ export default function RegisterForm() {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>password</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="password"
+                        placeholder="*********"
+                        {...field}
+                      />
+                    </FormControl>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="confirmPassword"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>confirm password</FormLabel>
                     <FormControl>
                       <Input
                         type="password"
