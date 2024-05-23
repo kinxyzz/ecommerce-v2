@@ -2,6 +2,7 @@
 
 import { z } from "zod";
 
+import { useUser } from "@/app/hook/useUser";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -12,10 +13,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useTokenStore } from "@/store/token/store";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signIn } from "next-auth/react";
+import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   Card,
@@ -36,6 +39,11 @@ const formSchema = z.object({
 });
 
 export default function LoginForm() {
+  const setToken = useTokenStore((state) => state.setToken);
+  const { login } = useUser.loginUser();
+  const [errorStatus, setErrorStatus] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -46,25 +54,21 @@ export default function LoginForm() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const login = await signIn("credentials", {
-      email: values.email,
-      password: values.password,
-      redirect: false,
+    setLoading(true);
+    login(values, {
+      onSuccess: (data) => {
+        setToken(data.data);
+        router.push("/");
+      },
     });
-    console.log(login);
-
-    if (login?.error) {
-      throw new Error(login.error);
-    }
-
-    router.push("/");
+    setLoading(false);
   }
-
   return (
     <Card>
       <CardHeader>
         <CardTitle>Login</CardTitle>
         <CardDescription>Enter your details to Login</CardDescription>
+        <p className="text-red-500">{errorStatus}</p>
       </CardHeader>
 
       <CardContent className="grid gap-4">
@@ -85,6 +89,7 @@ export default function LoginForm() {
                         type="email"
                         placeholder="Input Your Email"
                         {...field}
+                        disabled={loading}
                       />
                     </FormControl>
                     <FormMessage />
@@ -102,6 +107,7 @@ export default function LoginForm() {
                         type="password"
                         placeholder="*********"
                         {...field}
+                        disabled={loading}
                       />
                     </FormControl>
 
@@ -110,7 +116,10 @@ export default function LoginForm() {
                 )}
               />
               <div>
-                <Button type="submit">Submit</Button>
+                <Button disabled={loading} type="submit">
+                  {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}{" "}
+                  Submit
+                </Button>
               </div>
             </form>
           </Form>

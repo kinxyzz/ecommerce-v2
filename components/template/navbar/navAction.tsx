@@ -2,19 +2,14 @@
 
 import { Button } from "@/components/ui/button";
 import { ShoppingCart } from "lucide-react";
-import { signOut, useSession } from "next-auth/react";
+
 import { useRouter } from "next/navigation";
 
 export default function NavbarAction() {
-  const { data: session, status } = useSession();
   const router = useRouter();
-  function handleSignout() {
-    signOut();
-  }
+  function handleSignout() {}
   function handleLogin() {
-    if (!session) {
-      router.push("/login");
-    }
+    router.push("/login");
   }
   return (
     <div className="flex gap-2 items-center">
@@ -22,11 +17,7 @@ export default function NavbarAction() {
         <ShoppingCart size={20} />
       </Button>
       <div className="hidden lg:block">
-        {status === "authenticated" ? (
-          <Button onClick={handleSignout}>Logout</Button>
-        ) : (
-          <Button onClick={handleLogin}>Login</Button>
-        )}
+        <Button onClick={handleLogin}>Login</Button>
       </div>
     </div>
   );

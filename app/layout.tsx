@@ -1,8 +1,8 @@
 import Navbar from "@/components/template/navbar/navbar";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
-import AuthProvider from "./AuthProvider";
 import "./globals.css";
+import QueryProvider from "./provider/queryProvider";
 
 const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -22,12 +22,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={poppins.className}>
-        <AuthProvider>
-          <Navbar />
-          {children}
-        </AuthProvider>
+        <Navbar />
+        <QueryProvider>{children}</QueryProvider>
       </body>
     </html>
   );
 }
-
