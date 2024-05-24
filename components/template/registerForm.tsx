@@ -52,7 +52,10 @@ export default function RegisterForm() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const res = await axios.post("/api/user/register", values);
+    const res = await axios.post(
+      "http://localhost:5500/api/user/register",
+      values
+    );
     if (res.status === 201) {
       alert("User created");
       form.reset();

@@ -1,4 +1,4 @@
-import { useTokenStore } from "@/store/token/store";
+import { useTokenStore } from "@/store/authenticated/store";
 import axios from "axios";
 
 const api = axios.create({

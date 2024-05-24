@@ -10,9 +10,12 @@ const nextConfig = {
         protocol: "https",
         hostname: "picsum.photos",
       },
+      {
+        protocol: "https",
+        hostname: "grrbndzjljmvpcgqddpg.supabase.co",
+      },
     ],
   },
 };
 
 export default nextConfig;
-

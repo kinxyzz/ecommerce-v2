@@ -13,7 +13,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useTokenStore } from "@/store/token/store";
+import { useTokenStore } from "@/store/authenticated/store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
@@ -39,6 +39,7 @@ const formSchema = z.object({
 });
 
 export default function LoginForm() {
+  const token = useTokenStore((state) => state.token);
   const setToken = useTokenStore((state) => state.setToken);
   const { login } = useUser.loginUser();
   const [errorStatus, setErrorStatus] = useState("");
