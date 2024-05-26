@@ -1,7 +1,7 @@
 import { UserService } from "@/services/userService";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
-function loginUser() {
+function LoginUser() {
   const { mutate: login, ...rest } = useMutation({
     mutationKey: ["login"],
     mutationFn: ({ email, password }: { email: string; password: string }) =>
@@ -17,7 +17,7 @@ function loginUser() {
   return { login, ...rest };
 }
 
-function getUser() {
+function GettUser() {
   const { data, ...rest } = useQuery({
     queryKey: ["user"],
     queryFn: () => UserService.getUser(),
@@ -26,4 +26,4 @@ function getUser() {
   return { data, ...rest };
 }
 
-export { getUser, loginUser };
+export { GettUser, LoginUser };
