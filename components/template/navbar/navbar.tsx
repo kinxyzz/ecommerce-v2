@@ -1,9 +1,18 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import NavMenu from "./NavMenu";
 import NavbarAction from "./navAction";
 import NavLink from "./navLink";
 import NavSearch from "./navSearch";
 
 export default function navbar() {
+  const pathname = usePathname();
+
+  if (pathname.startsWith("/admin")) {
+    return null;
+  }
+
   return (
     <header className="block border-b">
       <nav className="container mx-auto">
