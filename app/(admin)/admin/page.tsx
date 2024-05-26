@@ -8,14 +8,14 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
+import SalesPiece from "@/components/fragment/dashboard/salesPiece";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { CircleUser } from "lucide-react";
 
 export default function page() {
   const price = 500000;
   return (
-    <div className="w-full mt-16 lg:mt-12 overflow-y-auto">
+    <div className="w-full pt-12 overflow-y-auto">
       <div className="flex gap-4 m-4 flex-wrap md:flex-row md:flex-nowrap justify-center">
         <DashboardCount
           dataNum={price.toLocaleString("id-ID", {
@@ -71,34 +71,15 @@ export default function page() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                <TableRow>
-                  <TableCell className="font-medium">
-                    <p>kudamuda</p>
-                    <p className="text-sm text-gray-400">kudamuda@gmil.com</p>
-                  </TableCell>
-                  <TableCell className="text-right">$250.00</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="font-medium">
-                    <p>kudamuda</p>
-                    <p className="text-sm text-gray-400">kudamuda@gmil.com</p>
-                  </TableCell>
-                  <TableCell className="text-right">$250.00</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="font-medium">
-                    <p>kudamuda</p>
-                    <p className="text-sm text-gray-400">kudamuda@gmil.com</p>
-                  </TableCell>
-                  <TableCell className="text-right">$250.00</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell className="font-medium">
-                    <p>kudamuda</p>
-                    <p className="text-sm text-gray-400">kudamuda@gmil.com</p>
-                  </TableCell>
-                  <TableCell className="text-right">$250.00</TableCell>
-                </TableRow>
+                {Array.from({ length: 8 }, (_, i) => i + 1).map((i, k) => (
+                  <TableRow key={k}>
+                    <TableCell className="font-medium">
+                      <p>kudamuda</p>
+                      <p className="text-sm text-gray-400">kudamuda@gmil.com</p>
+                    </TableCell>
+                    <TableCell className="text-right">$250.00</TableCell>
+                  </TableRow>
+                ))}
               </TableBody>
             </Table>
           </CardContent>
@@ -110,17 +91,10 @@ export default function page() {
             </h2>
           </CardHeader>
           <CardContent>
-            <div className="flex justify-between">
-              <div className="flex gap-4 items-center">
-                <CircleUser size={40} />
-                <div className="font-medium">
-                  <p>Your name</p>
-                  <p className="text-sm text-gray-400">YourEmail@email.com</p>
-                </div>
-              </div>
-              <div>
-                <p>$250.00</p>
-              </div>
+            <div className="flex flex-col gap-6 justify-center">
+              {Array.from({ length: 10 }, (_, i) => i + 1).map((i, k) => (
+                <SalesPiece key={k} />
+              ))}
             </div>
           </CardContent>
         </Card>

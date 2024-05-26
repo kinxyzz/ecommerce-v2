@@ -1,3 +1,4 @@
+import { IdashbordCount } from "@/@types/interface";
 import { icons } from "lucide-react";
 import { Card, CardContent, CardHeader } from "../ui/card";
 
@@ -6,12 +7,7 @@ export default function DashboardCount({
   iconName,
   dataNum,
   percent,
-}: {
-  title: string;
-  iconName: keyof typeof icons;
-  dataNum: number | string;
-  percent: string;
-}) {
+}: IdashbordCount) {
   const LucideIcon = icons[iconName];
   return (
     <Card className="grow">
