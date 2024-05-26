@@ -21,8 +21,8 @@ export default function Hero() {
           </h3>
           <div>
             <blockquote className="mt-8 text-yellow-400 text-sm lg:text-base border-l-2 pl-2 italic">
-              "Clothing is not just fabric, but a canvas on which we express
-              ourselves, adding an elegant touch to every stride."
+              Clothing is not just fabric, but a canvas on which we express
+              ourselves, adding an elegant touch to every stride.
             </blockquote>
           </div>
           <div className="mt-8">

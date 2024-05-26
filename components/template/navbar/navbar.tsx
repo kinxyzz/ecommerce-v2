@@ -6,7 +6,7 @@ import NavbarAction from "./navAction";
 import NavLink from "./navLink";
 import NavSearch from "./navSearch";
 
-export default function navbar() {
+export default function Navbar() {
   const pathname = usePathname();
 
   if (pathname.startsWith("/admin")) {

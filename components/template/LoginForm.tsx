@@ -2,7 +2,7 @@
 
 import { z } from "zod";
 
-import { useUser } from "@/app/hook/useUser";
+import { loginUser } from "@/app/hook/useUser";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -41,7 +41,7 @@ const formSchema = z.object({
 export default function LoginForm() {
   const token = useTokenStore((state) => state.token);
   const setToken = useTokenStore((state) => state.setToken);
-  const { login } = useUser.loginUser();
+  const { login } = loginUser();
   const [errorStatus, setErrorStatus] = useState("");
   const [loading, setLoading] = useState(false);
 
