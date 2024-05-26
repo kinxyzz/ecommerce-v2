@@ -15,7 +15,7 @@ import { CircleUser } from "lucide-react";
 export default function page() {
   const price = 500000;
   return (
-    <div className="w-full mt-12 overflow-y-auto">
+    <div className="w-full mt-16 lg:mt-12 overflow-y-auto">
       <div className="flex gap-4 m-4 flex-wrap md:flex-row md:flex-nowrap justify-center">
         <DashboardCount
           dataNum={price.toLocaleString("id-ID", {
