@@ -23,7 +23,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../ui/card";
+} from "../../ui/card";
 
 const formSchema = z.object({
   username: z.string().min(2, {

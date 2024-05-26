@@ -34,8 +34,8 @@ export default function ProductContent() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {Array.from({ length: 10 }, (_, i) => i + 1).map((i) => (
-                <TableRow>
+              {Array.from({ length: 10 }, (_, i) => i + 1).map((i, k) => (
+                <TableRow key={k}>
                   <TableCell className="font-medium">Image</TableCell>
                   <TableCell className="font-medium">Product Name</TableCell>
                   <TableCell>Status Product</TableCell>

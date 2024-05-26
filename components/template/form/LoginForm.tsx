@@ -27,7 +27,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../ui/card";
+} from "../../ui/card";
 
 const formSchema = z.object({
   email: z.string().email({

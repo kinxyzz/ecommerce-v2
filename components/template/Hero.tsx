@@ -26,7 +26,7 @@ export default function Hero() {
             </blockquote>
           </div>
           <div className="mt-8">
-            <Button variant="outline">
+            <Button>
               <Images className="mr-4" />
               Koleksi Terbaru
             </Button>
