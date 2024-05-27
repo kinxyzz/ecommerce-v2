@@ -13,9 +13,9 @@ import ProductForm from "../../form/productForm";
 
 export default function ProductOperation() {
   return (
-    <div className="flex w-full justify-between mt-8">
+    <div className="flex w-full flex-col lg:flex-row gap-4 lg:justify-between mt-8">
       <div>
-        <Menubar>
+        <Menubar className="w-fit">
           <MenubarMenu>
             <MenubarTrigger>All</MenubarTrigger>
           </MenubarMenu>
@@ -39,7 +39,7 @@ export default function ProductOperation() {
         </Button>
         <Dialog>
           <DialogTrigger asChild>
-            <Button>
+            <Button size="sm">
               <CirclePlus size={16} className="mr-2" /> Add Product
             </Button>
           </DialogTrigger>

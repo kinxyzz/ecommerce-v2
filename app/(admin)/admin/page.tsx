@@ -15,7 +15,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 export default function page() {
   const price = 500000;
   return (
-    <div className="w-full pt-12 overflow-y-auto">
+    <div className="w-full overflow-y-auto ">
       <div className="flex gap-4 m-4 flex-wrap md:flex-row md:flex-nowrap justify-center">
         <DashboardCount
           dataNum={price.toLocaleString("id-ID", {
