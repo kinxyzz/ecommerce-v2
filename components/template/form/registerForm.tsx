@@ -1,8 +1,8 @@
 "use client";
-import axios from "axios";
 
 import { z } from "zod";
 
+import { RegisterUser } from "@/app/hook/useUser";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -25,7 +25,7 @@ import {
   CardTitle,
 } from "../../ui/card";
 
-const formSchema = z.object({
+export const formRegisterSchema = z.object({
   username: z.string().min(2, {
     message: "Username must be at least 2 characters.",
   }),
@@ -41,8 +41,10 @@ const formSchema = z.object({
 });
 
 export default function RegisterForm() {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const { register } = RegisterUser();
+
+  const form = useForm<z.infer<typeof formRegisterSchema>>({
+    resolver: zodResolver(formRegisterSchema),
     defaultValues: {
       username: "",
       confirmPassword: "",
@@ -51,15 +53,13 @@ export default function RegisterForm() {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    const res = await axios.post(
-      "http://localhost:5500/api/user/register",
-      values
-    );
-    if (res.status === 201) {
-      alert("User created");
-      form.reset();
-    }
+  async function onSubmit(values: z.infer<typeof formRegisterSchema>) {
+    register(values, {
+      onSuccess: () => {
+        alert("User created");
+        form.reset();
+      },
+    });
   }
 
   return (

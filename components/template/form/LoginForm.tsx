@@ -29,7 +29,7 @@ import {
   CardTitle,
 } from "../../ui/card";
 
-const formSchema = z.object({
+export const formLoginSchema = z.object({
   email: z.string().email({
     message: "Please enter a valid email.",
   }),
@@ -39,22 +39,21 @@ const formSchema = z.object({
 });
 
 export default function LoginForm() {
-  const token = useTokenStore((state) => state.token);
   const setToken = useTokenStore((state) => state.setToken);
   const { login } = LoginUser();
   const [errorStatus, setErrorStatus] = useState("");
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof formLoginSchema>>({
+    resolver: zodResolver(formLoginSchema),
     defaultValues: {
       password: "",
       email: "",
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formLoginSchema>) {
     setLoading(true);
     login(values, {
       onSuccess: (data) => {
