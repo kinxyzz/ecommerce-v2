@@ -2,7 +2,7 @@ import { useTokenStore } from "@/store/authenticated/store";
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http:express-ecommerce-brown.vercel.app/api",
+  baseURL: "https://express-ecommerce-brown.vercel.app/api",
   withCredentials: true,
 });
 
@@ -36,7 +36,7 @@ api.interceptors.response.use(
 
         try {
           const response = await axios.get(
-            "http://localhost:5500/api/user/token",
+            "https://express-ecommerce-brown.vercel.app/api/user/token",
             { withCredentials: true }
           );
 
