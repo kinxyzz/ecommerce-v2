@@ -2,7 +2,7 @@ import { useTokenStore } from "@/store/authenticated/store";
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:5500/api",
+  baseURL: "http:express-ecommerce-brown.vercel.app/api",
   withCredentials: true,
 });
 
