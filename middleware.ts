@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function middleware(req: NextRequest) {
   const url = req.nextUrl.clone();
   const refreshTokenCookie = req.cookies.get("refreshToken");
+  console.log(refreshTokenCookie);
 
   if (!refreshTokenCookie) {
     if (url.pathname === "/admin") {

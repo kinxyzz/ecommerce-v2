@@ -1,8 +1,9 @@
+import { serverUrl } from "@/lib/static";
 import { useTokenStore } from "@/store/authenticated/store";
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://express-ecommerce-brown.vercel.app/api",
+  baseURL: `${serverUrl}/api`,
   withCredentials: true,
 });
 
@@ -35,10 +36,9 @@ api.interceptors.response.use(
         setRefreshTokenInProgress(true);
 
         try {
-          const response = await axios.get(
-            "https://express-ecommerce-brown.vercel.app/api/user/token",
-            { withCredentials: true }
-          );
+          const response = await axios.get(`${serverUrl}/api/user/token`, {
+            withCredentials: true,
+          });
 
           const newAccessToken = response.data.data.token;
           setToken(newAccessToken);

@@ -1,25 +1,22 @@
 import { formLoginSchema } from "@/components/template/form/LoginForm";
 import { formRegisterSchema } from "@/components/template/form/registerForm";
+import { serverUrl } from "@/lib/static";
 import axios from "axios";
 import { z } from "zod";
 import api from "./axiosInstance";
 
 export class UserService {
   static async Login(loginData: z.infer<typeof formLoginSchema>) {
-    const res = await axios.post(
-      "https://express-ecommerce-brown.vercel.app/api/user/login",
-      loginData,
-      {
-        withCredentials: true,
-      }
-    );
+    const res = await axios.post(`${serverUrl}/api/user/login`, loginData, {
+      withCredentials: true,
+    });
 
     return res.data;
   }
 
   static async register(registerData: z.infer<typeof formRegisterSchema>) {
     const res = await axios.post(
-      "https://express-ecommerce-brown.vercel.app/api/user/register",
+      `${serverUrl}/api/user/register`,
       registerData
     );
 
