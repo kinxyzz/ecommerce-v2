@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function middleware(req: NextRequest) {
   const url = req.nextUrl.clone();
-  const refreshTokenCookie = req.cookies.get("refreshToken");
+  const refreshTokenCookie = req.cookies.get("refreshToken")?.value;
   console.log("this is your refreshtoken" + refreshTokenCookie);
 
   if (!refreshTokenCookie) {
@@ -14,7 +14,7 @@ export async function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  const refreshToken = refreshTokenCookie.value;
+  const refreshToken = refreshTokenCookie;
 
   try {
     const decoded = jwt.decode(refreshToken) as jwt.JwtPayload | null;
