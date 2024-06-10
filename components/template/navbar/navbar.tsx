@@ -19,7 +19,7 @@ export default function Navbar() {
     if (isSuccess) {
       setIsAuthenticated(data?.data?.isAuthenticated);
     }
-  }, [isSuccess]);
+  }, [isSuccess, data?.data?.isAuthenticated, setIsAuthenticated]);
 
   if (pathname.startsWith("/admin")) {
     return null;
