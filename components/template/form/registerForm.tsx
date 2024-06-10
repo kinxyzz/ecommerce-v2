@@ -15,6 +15,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import {
   Card,
@@ -42,6 +43,7 @@ export const formRegisterSchema = z.object({
 
 export default function RegisterForm() {
   const { register } = RegisterUser();
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof formRegisterSchema>>({
     resolver: zodResolver(formRegisterSchema),
@@ -56,7 +58,7 @@ export default function RegisterForm() {
   async function onSubmit(values: z.infer<typeof formRegisterSchema>) {
     register(values, {
       onSuccess: () => {
-        alert("User created");
+        router.push("/login");
         form.reset();
       },
     });

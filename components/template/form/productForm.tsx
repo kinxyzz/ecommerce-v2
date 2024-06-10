@@ -2,6 +2,8 @@
 
 import { z } from "zod";
 
+import { UseUploadImage } from "@/app/hook/useImage";
+import { UseCreateProduct, UseGetCategory } from "@/app/hook/useProduct";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -13,13 +15,20 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { useToast } from "@/components/ui/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 
-const formSchema = z.object({
+export const productSchema = z.object({
   name: z.string().min(6, {
     message: "name must be at least 6 characters.",
   }),
@@ -32,26 +41,52 @@ const formSchema = z.object({
   quantity: z.string().min(1, {
     message: "quantity must be at least 1 stock.",
   }),
+  category_id: z.string().min(1),
+  image: z.string().optional(),
 });
 
 export default function ProductForm() {
+  const imageRef = useRef<HTMLInputElement>(null);
   const [image, setImage] = useState<File>({} as File);
+  const { toast } = useToast();
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const { createProduct } = UseCreateProduct();
+  const { category = {} } = UseGetCategory();
+  const { uploadImage } = UseUploadImage();
+  const form = useForm<z.infer<typeof productSchema>>({
+    resolver: zodResolver(productSchema),
     defaultValues: {
       name: "",
       description: "",
       price: "",
       quantity: "",
+      image: "",
+      category_id: "",
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof productSchema>) {
     setLoading(true);
-    console.log({ ...values, image });
-    setLoading(false);
+    uploadImage(image, {
+      onSuccess(data) {
+        createProduct(
+          { ...values, image: data.imageUrl },
+          {
+            onSuccess: () => {
+              toast({
+                title: "Create Product",
+                description: "Success Create Product",
+              });
+              form.reset();
+              if (imageRef.current) {
+                imageRef.current.value = "";
+              }
+              setLoading(false);
+            },
+          }
+        );
+      },
+    });
   }
 
   return (
@@ -116,6 +151,43 @@ export default function ProductForm() {
             </FormItem>
           )}
         />
+
+        <FormField
+          control={form.control}
+          name="category_id"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Category</FormLabel>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+                value={field.value}
+                name={field.name}
+              >
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a category" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {category?.data?.map(
+                    (cate: { category_id: string; name: string }) => (
+                      <SelectItem
+                        key={cate.category_id}
+                        value={cate.category_id.toString()}
+                      >
+                        {cate.name}
+                      </SelectItem>
+                    )
+                  )}
+                </SelectContent>
+              </Select>
+
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <FormField
           control={form.control}
           name="quantity"
@@ -139,6 +211,7 @@ export default function ProductForm() {
         <Input
           id="image"
           type="file"
+          ref={imageRef}
           placeholder="your imageProduct Url"
           onChange={(e) => {
             setImage(e.target.files ? e.target.files[0] : ({} as File));

@@ -7,7 +7,7 @@ import api from "./axiosInstance";
 export class UserService {
   static async Login(loginData: z.infer<typeof formLoginSchema>) {
     const res = await axios.post(
-      "http://localhost:5500/api/user/login",
+      "express-ecommerce-brown.vercel.app/api/user/login",
       loginData,
       {
         withCredentials: true,
@@ -19,10 +19,20 @@ export class UserService {
 
   static async register(registerData: z.infer<typeof formRegisterSchema>) {
     const res = await axios.post(
-      "http://localhost:5500/api/user/register",
+      "express-ecommerce-brown.vercel.app/api/user/register",
       registerData
     );
 
+    return res.data;
+  }
+
+  static async Logout() {
+    const res = await api.patch("/user/logout", {});
+    return res.data;
+  }
+
+  static async getCurrent() {
+    const res = await api.get("/user/current");
     return res.data;
   }
 
@@ -33,5 +43,12 @@ export class UserService {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  static async userToken() {
+    const res = await axios.get(
+      "express-ecommerce-brown.vercel.app/api/user/token"
+    );
+    return res.data;
   }
 }

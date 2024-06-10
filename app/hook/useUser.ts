@@ -9,12 +9,6 @@ function LoginUser() {
     mutationKey: ["login"],
     mutationFn: (loginData: z.infer<typeof formLoginSchema>) =>
       UserService.Login(loginData),
-    onSuccess: (data) => {
-      console.log(data);
-    },
-    onError: (error) => {
-      console.log(error);
-    },
   });
 
   return { login, ...rest };
@@ -36,6 +30,15 @@ function RegisterUser() {
   return { register, ...rest };
 }
 
+function LogoutUser() {
+  const { mutate: logout, ...rest } = useMutation({
+    mutationKey: ["logout"],
+    mutationFn: () => UserService.Logout(),
+  });
+
+  return { logout, ...rest };
+}
+
 function GetUser() {
   const { data, ...rest } = useQuery({
     queryKey: ["user"],
@@ -45,4 +48,14 @@ function GetUser() {
   return { data, ...rest };
 }
 
-export { GetUser, LoginUser, RegisterUser };
+function GetCurrentUser() {
+  const { data, ...rest } = useQuery({
+    queryKey: ["currentUser"],
+    queryFn: () => UserService.getCurrent(),
+    retry: false,
+  });
+
+  return { data, ...rest };
+}
+
+export { GetCurrentUser, GetUser, LoginUser, LogoutUser, RegisterUser };

@@ -1,5 +1,6 @@
 import Navbar from "@/components/template/navbar/navbar";
 import ThemeProvider from "@/components/themeProvider";
+import { Toaster } from "@/components/ui/toaster";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
@@ -23,15 +24,16 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <body suppressHydrationWarning={true} className={poppins.className}>
-        <Navbar />
         <QueryProvider>
+          <Navbar />
           <ThemeProvider
             attribute="class"
-            defaultTheme="dark"
+            defaultTheme="light"
             enableSystem
             disableTransitionOnChange
           >
             {children}
+            <Toaster />
           </ThemeProvider>
         </QueryProvider>
       </body>

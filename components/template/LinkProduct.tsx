@@ -11,7 +11,7 @@ import { Button } from "../ui/button";
 
 export default function LinkProduct() {
   return (
-    <div className="flex justify-between flex-wrap md:flex-nowrap items-center gap-4 mt-4 w-full">
+    <div className="flex justify-between flex-wrap md:flex-nowrap items-center gap-4 mt-12 w-full">
       <Card>
         <CardHeader>
           <CardTitle>Kain Batik Katun</CardTitle>

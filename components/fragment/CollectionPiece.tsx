@@ -1,33 +1,88 @@
+"use client";
+import { ICartList, IitemList } from "@/@types/interface";
+import { UseAddCart, UseDeleteCart } from "@/app/hook/useCart";
+import { useTokenStore } from "@/store/authenticated/store";
+import { ToastAction } from "@radix-ui/react-toast";
 import { ShoppingCart } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 import { Card, CardContent, CardFooter } from "../ui/card";
+import { useToast } from "../ui/use-toast";
 
-export default function CollectionPiece() {
+export default function CollectionPiece({
+  item,
+  cart,
+}: {
+  item: IitemList<number, string>;
+  cart?: ICartList<number, string>[];
+}) {
+  const { toast } = useToast();
+  const isAuthenticated = useTokenStore((state) => state.isAuthenticated);
+  const { addCart } = UseAddCart();
+  const { deleteCart } = UseDeleteCart();
+  const inCart = cart?.find((c) => c.product_id === item.product_id);
+  const router = useRouter();
+
+  function handleCart() {
+    if (inCart) {
+      deleteCart(inCart.cart_id);
+    } else {
+      addCart(item.product_id, {
+        onError(error) {
+          if (error.message.endsWith("500")) {
+            toast({
+              title: "User Not Login",
+              description: "Please Login First",
+              action: (
+                <Button asChild>
+                  <ToastAction
+                    altText="Login"
+                    onClick={() => router.push("/login")}
+                  >
+                    Login
+                  </ToastAction>
+                </Button>
+              ),
+            });
+          }
+        },
+      });
+    }
+  }
+
   return (
-    <Card className="border-none shadow-md">
+    <Card className="border shadow-md">
       <CardContent className="px-0">
         <Image
           className="rounded-md"
           src="https://grrbndzjljmvpcgqddpg.supabase.co/storage/v1/object/public/bahan/0.26720228373226584-bstr58.jpg"
           alt="kain batik"
           width={250}
+          priority
           height={200}
         />
         <div className="flex flex-col gap-3 mt-4 px-2">
-          <h3 className="text-lg font-semibold">Batik Tulis Katun</h3>
-          <h3 className="text-base font-medium">SRIKTN001</h3>
+          <h3 className="text-lg font-semibold">{item.name}</h3>
+          <h3 className="text-base font-medium">{item.description}</h3>
           <p className="text-sm font-light">
-            {(750000).toLocaleString("id-ID", {
+            {/* {item.price.toLocaleString("id-ID", {
               style: "currency",
               currency: "IDR",
-            })}{" "}
+            })}{" "} */}
+            anggap saja harga
           </p>
         </div>
       </CardContent>
       <CardFooter className="flex p-2 justify-end">
-        <Button>
-          <ShoppingCart className="mr-3" /> Add To Cart
+        <Button
+          onClick={() => handleCart()}
+          size="sm"
+          variant={inCart ? "outline" : "default"}
+          className={"text-sm"}
+        >
+          <ShoppingCart size={16} className="mr-3" />
+          {inCart ? "In Cart" : "To Cart"}
         </Button>
       </CardFooter>
     </Card>

@@ -17,23 +17,23 @@ export default function NavMenu({ children }: React.PropsWithChildren) {
   const [mounted, setMounted] = React.useState(false);
 
   return (
-    <>
+    <div className="lg:hidden w-1/3">
       <Sheet open={mounted} onOpenChange={setMounted}>
-        <SheetTrigger className="lg:hidden" asChild>
+        <SheetTrigger asChild>
           <Button size="icon" variant="outline">
             <Menu size={20} />
           </Button>
         </SheetTrigger>
         <SheetContent side="left">
           <SheetHeader>
-            <SheetTitle>
-              <Link href="/">NextLogo</Link>
+            <SheetTitle className="mb-2">
+              <Link href="/">Sripadi Batik</Link>
             </SheetTitle>
           </SheetHeader>
 
           <NavLink mounted={mounted} setMounted={setMounted} hideLarge={true} />
         </SheetContent>
       </Sheet>
-    </>
+    </div>
   );
 }

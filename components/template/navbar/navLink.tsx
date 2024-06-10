@@ -1,7 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React from "react";
+
+interface INavLinkProps {
+  hideLarge?: boolean;
+  setMounted?: React.Dispatch<React.SetStateAction<boolean>>;
+  mounted?: boolean;
+}
 
 const dataLink = [
   {
@@ -14,27 +21,26 @@ const dataLink = [
   },
   {
     name: "Batik Tulis Katun",
-    url: "/products?category=katun",
+    url: "/products?material=katun",
   },
   {
     name: "Batik Tulis Satin",
-    url: "/products?category=satin",
+    url: "/products?material=satin",
   },
   {
     name: "Batik Tulis Sutra",
-    url: "/products?category=sutra",
+    url: "/products?material=sutra",
   },
 ];
 
-export default function NavLink({
-  hideLarge,
-  setMounted,
-  mounted,
-}: {
-  hideLarge?: boolean;
-  setMounted?: React.Dispatch<React.SetStateAction<boolean>>;
-  mounted?: boolean;
-}) {
+export default function NavLink(props: INavLinkProps) {
+  const { hideLarge, setMounted } = props;
+  const pathname = usePathname();
+  const hideWhenPath = pathname.startsWith("/products");
+  const newDataLink = hideWhenPath
+    ? dataLink.filter((_, i) => i < 2)
+    : dataLink;
+
   function handleClose() {
     if (setMounted) setMounted(false);
   }
@@ -47,7 +53,7 @@ export default function NavLink({
           : "lg:flex gap-6 hidden"
       }`}
     >
-      {dataLink.map((link) => (
+      {newDataLink.map((link) => (
         <li
           className={`${
             hideLarge
