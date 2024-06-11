@@ -9,7 +9,7 @@ export default function ProductList() {
   const { myCart = [] } = UseGetCart();
 
   return (
-    <div className="grow grid grid-cols-2 lg:grid-cols-4 gap-y-4 gap-2 justify-center items">
+    <div className="grow grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-4 gap-2 justify-center items">
       {productList?.data?.map((item: IitemList<number, string>) => (
         <CollectionPiece key={item.product_id} cart={myCart} item={item} />
       ))}

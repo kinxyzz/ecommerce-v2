@@ -55,7 +55,7 @@ export default function CollectionPiece({
     <Card className="border shadow-md">
       <CardContent className="px-0">
         <Image
-          className="rounded-md"
+          className="rounded-md mx-auto"
           src="https://grrbndzjljmvpcgqddpg.supabase.co/storage/v1/object/public/bahan/0.26720228373226584-bstr58.jpg"
           alt="kain batik"
           width={250}

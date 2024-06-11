@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function middleware(req: NextRequest) {
   const url = req.nextUrl.clone();
-  const refreshTokenCookie = req.cookies.get("refreshToken")?.value;
+  const refreshTokenCookie = req.cookies?.get("refreshToken")?.value;
   console.log("this is your refreshtoken" + refreshTokenCookie);
 
   if (!refreshTokenCookie) {
@@ -14,13 +14,12 @@ export async function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  const refreshToken = refreshTokenCookie;
-
   try {
-    const decoded = jwt.decode(refreshToken) as jwt.JwtPayload | null;
+    const decoded = jwt.decode(refreshTokenCookie) as jwt.JwtPayload | null;
 
     if (!decoded || decoded.role !== "ADMIN") {
-      if (url.pathname === "/admin") {
+      const protectedUrl = ["/admin", "/login", "/register"];
+      if (protectedUrl.includes(url.pathname)) {
         url.pathname = "/";
         return NextResponse.redirect(url);
       }
