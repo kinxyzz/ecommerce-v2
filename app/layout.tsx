@@ -3,6 +3,7 @@ import ThemeProvider from "@/components/themeProvider";
 import { Toaster } from "@/components/ui/toaster";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
+import { cookies } from "next/headers";
 import "./globals.css";
 import QueryProvider from "./provider/queryProvider";
 
@@ -21,6 +22,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const isAuthenticated = !!cookies().get("refreshToken")?.value;
+  console.log(isAuthenticated);
+
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <body suppressHydrationWarning={true} className={poppins.className}>
