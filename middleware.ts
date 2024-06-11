@@ -2,10 +2,10 @@ import jwt from "jsonwebtoken";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function middleware(req: NextRequest) {
-  const url = req.nextUrl.clone();
-  const refreshTokenCookie = req.cookies?.get("refreshToken")?.value;
   const response = NextResponse.next();
   response.headers.set("x-middleware-cache", "no-store");
+  const url = req.nextUrl.clone();
+  const refreshTokenCookie = req.cookies?.get("refreshToken")?.value;
 
   console.log("This is your refreshToken: " + refreshTokenCookie);
   try {
