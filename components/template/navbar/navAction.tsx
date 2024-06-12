@@ -40,7 +40,7 @@ export default function NavbarAction() {
         <Popover>
           <PopoverTrigger>
             <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" />
+              <AvatarImage src="/sripadilogo.png" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
           </PopoverTrigger>
