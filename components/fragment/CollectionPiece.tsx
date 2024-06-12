@@ -18,36 +18,33 @@ export default function CollectionPiece({
   cart?: ICartList<number, string>[];
 }) {
   const { toast } = useToast();
-  const isAuthenticated = useTokenStore((state) => state.isAuthenticated);
+  const token = useTokenStore((state) => state.token);
   const { addCart } = UseAddCart();
   const { deleteCart } = UseDeleteCart();
   const inCart = cart?.find((c) => c.product_id === item.product_id);
   const router = useRouter();
 
   function handleCart() {
+    if (!token) {
+      toast({
+        title: "User Not Login",
+        description: "Please Login First",
+        action: (
+          <Button asChild>
+            <ToastAction altText="Login" onClick={() => router.push("/login")}>
+              Login
+            </ToastAction>
+          </Button>
+        ),
+      });
+
+      return;
+    }
+
     if (inCart) {
       deleteCart(inCart.cart_id);
     } else {
-      addCart(item.product_id, {
-        onError(error) {
-          if (error.message.endsWith("500")) {
-            toast({
-              title: "User Not Login",
-              description: "Please Login First",
-              action: (
-                <Button asChild>
-                  <ToastAction
-                    altText="Login"
-                    onClick={() => router.push("/login")}
-                  >
-                    Login
-                  </ToastAction>
-                </Button>
-              ),
-            });
-          }
-        },
-      });
+      addCart(item.product_id);
     }
   }
 

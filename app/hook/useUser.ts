@@ -58,4 +58,21 @@ function GetCurrentUser() {
   return { data, ...rest };
 }
 
-export { GetCurrentUser, GetUser, LoginUser, LogoutUser, RegisterUser };
+function GetUserToken() {
+  const { data, ...rest } = useQuery({
+    queryKey: ["currentUser"],
+    queryFn: () => UserService.userToken(),
+    retry: false,
+  });
+
+  return { data, ...rest };
+}
+
+export {
+  GetCurrentUser,
+  GetUser,
+  GetUserToken,
+  LoginUser,
+  LogoutUser,
+  RegisterUser,
+};

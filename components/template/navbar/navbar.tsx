@@ -9,7 +9,8 @@ import NavSearch from "./navSearch";
 
 export default function Navbar() {
   const pathname = usePathname();
-  if (pathname.startsWith("/admin")) {
+  const hideWhenpath = ["/login", "/register", "/admin"];
+  if (hideWhenpath.includes(pathname) || pathname.startsWith("/admin")) {
     return null;
   }
 

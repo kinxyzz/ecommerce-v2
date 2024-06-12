@@ -4,7 +4,7 @@ import { Card, CardFooter, CardHeader } from "../ui/card";
 export default function Featured() {
   return (
     <div className="bg-primary text-primary-foreground py-12 w-full mt-24">
-      <div className="container mx-auto flex-wrap flex justify-between gap-4 items-center h-full">
+      <div className="container mx-auto flex-col md:flex-row md:flex-wrap flex justify-between gap-4 items-center h-full">
         <Card className="flex-1">
           <CardHeader>
             <h3 className="scroll-m-20 flex items-center text-xl lg:text-2xl font-semibold tracking-tight">

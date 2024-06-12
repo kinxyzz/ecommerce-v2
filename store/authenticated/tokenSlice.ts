@@ -14,6 +14,7 @@ export const CreateTokenSlice: StateCreator<tokenSlice, [], [], tokenSlice> = (
 ) => ({
   isAuthenticated: false,
   token: null,
+
   setIsAuthenticated: (inAuth) => set({ isAuthenticated: inAuth }),
   setToken: (token) => set({ token }),
   refreshTokenInProgress: false,

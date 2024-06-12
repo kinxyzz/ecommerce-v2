@@ -41,4 +41,9 @@ export class UserService {
       console.log(error);
     }
   }
+
+  static async userToken() {
+    const res = await api.get("/user/token");
+    return res.data;
+  }
 }
