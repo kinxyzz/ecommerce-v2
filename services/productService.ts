@@ -3,8 +3,16 @@ import { z } from "zod";
 import api from "./axiosInstance";
 
 export default class productService {
-  static async getProduct() {
-    const res = await api.get("/product");
+  static async getProduct({
+    page = 1,
+    material,
+  }: {
+    page: number;
+    material: string | null;
+  }) {
+    const res = await api.get(
+      `/product?page=${page}&${material ? `material=${material}` : ""}`
+    );
     return res.data;
   }
 

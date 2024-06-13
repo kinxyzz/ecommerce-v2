@@ -63,11 +63,10 @@ export default function CollectionPiece({
           <h3 className="text-lg font-semibold">{item.name}</h3>
           <h3 className="text-base font-medium">{item.description}</h3>
           <p className="text-sm font-light">
-            {/* {item.price.toLocaleString("id-ID", {
+            {item.price.toLocaleString("id-ID", {
               style: "currency",
               currency: "IDR",
-            })}{" "} */}
-            anggap saja harga
+            })}{" "}
           </p>
         </div>
       </CardContent>
