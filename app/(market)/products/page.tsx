@@ -19,18 +19,18 @@ const filterOption = [
 
 export default function page() {
   return (
-    <section className="flex gap-4 w-full ">
-      <div className="shrink min-w-72 border-r hidden lg:flex">
-        <div className="flex flex-col gap-12">
-          <h2 className="scroll-m-20 text-2xl font-semibold tracking-tight">
-            Filter Products
-          </h2>
-          <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<div>Loading...</div>}>
+      <section className="flex gap-4 w-full ">
+        <div className="shrink min-w-72 border-r hidden lg:flex">
+          <div className="flex flex-col gap-12">
+            <h2 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+              Filter Products
+            </h2>
             <FilterProduct filterField="material" options={filterOption} />
-          </Suspense>
+          </div>
         </div>
-      </div>
-      <ProductList />
-    </section>
+        <ProductList />
+      </section>
+    </Suspense>
   );
 }
