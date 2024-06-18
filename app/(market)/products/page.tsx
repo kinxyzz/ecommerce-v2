@@ -1,5 +1,6 @@
 import FilterProduct from "@/components/fragment/FilterProduct";
 import ProductList from "@/components/template/product/ProductList";
+import { Suspense } from "react";
 
 const filterOption = [
   {
@@ -24,7 +25,9 @@ export default function page() {
           <h2 className="scroll-m-20 text-2xl font-semibold tracking-tight">
             Filter Products
           </h2>
-          <FilterProduct filterField="material" options={filterOption} />
+          <Suspense>
+            <FilterProduct filterField="material" options={filterOption} />
+          </Suspense>
         </div>
       </div>
       <ProductList />

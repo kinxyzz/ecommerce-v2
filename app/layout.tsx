@@ -3,6 +3,7 @@ import ThemeProvider from "@/components/themeProvider";
 import { Toaster } from "@/components/ui/toaster";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
+import { Suspense } from "react";
 import "./globals.css";
 import QueryProvider from "./provider/queryProvider";
 
@@ -32,7 +33,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            {children}
+            <Suspense>{children}</Suspense>
             <Toaster />
           </ThemeProvider>
         </QueryProvider>
