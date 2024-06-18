@@ -13,6 +13,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useToast } from "@/components/ui/use-toast";
+import { serverUrl } from "@/lib/static";
 import { useTokenStore } from "@/store/authenticated/store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
@@ -41,6 +43,7 @@ export const formLoginSchema = z.object({
 export default function LoginForm() {
   const setToken = useTokenStore((state) => state.setToken);
   const { login } = LoginUser();
+  const { toast } = useToast();
   const [errorStatus, setErrorStatus] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -59,9 +62,16 @@ export default function LoginForm() {
       onSuccess: (data) => {
         setToken(data.data);
         router.push("/");
+        setLoading(false);
+      },
+      onError: (error: any) => {
+        toast({
+          title: "Login Failed",
+          description: error?.response?.data?.error,
+        });
+        setLoading(false);
       },
     });
-    setLoading(false);
   }
   return (
     <Card>
@@ -118,11 +128,16 @@ export default function LoginForm() {
               <div>
                 <Button disabled={loading} type="submit">
                   {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}{" "}
-                  Submit
+                  Login
                 </Button>
               </div>
             </form>
           </Form>
+        </div>
+        <div className="min-w-72 border-t pt-4">
+          <Button asChild className="w-full">
+            <Link href={`${serverUrl}/api/auth/google`}>Login With Google</Link>
+          </Button>
         </div>
       </CardContent>
 
