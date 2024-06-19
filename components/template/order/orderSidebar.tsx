@@ -6,13 +6,13 @@ import { usePathname, useRouter } from "next/navigation";
 
 export default function OrderSidebar() {
   const pathname = usePathname();
+  const router = useRouter();
   const regex = /^\/profile\/order\/.*$/;
 
   if (regex.test(pathname)) {
     return null;
   }
 
-  const router = useRouter();
   return (
     <aside className="shrink py-2 mb-2 border-b md:w-56 w-full">
       <h2 className="scroll-m-20 hidden md:block text-xl font-semibold tracking-tight">
@@ -33,7 +33,7 @@ export default function OrderSidebar() {
           <Button
             className="w-full border-none justify-start"
             variant="outline"
-            onClick={() => router.replace("/profile/order")}
+            onClick={() => router.push("/profile/order")}
           >
             <Package className="mr-2" size={20} />
             Orders

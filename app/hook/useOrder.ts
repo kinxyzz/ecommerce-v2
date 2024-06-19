@@ -24,7 +24,7 @@ export function GetOrder() {
   return { order, isLoading };
 }
 
-export function getDetailOrder(id: string | undefined) {
+export function GetDetailOrder(id: string | undefined) {
   const { data: order, isLoading } = useQuery({
     queryKey: ["order", id],
     queryFn: () => OrderService.getDetailOrder(id),
