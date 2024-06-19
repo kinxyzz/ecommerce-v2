@@ -39,7 +39,7 @@ export default function NavbarAction() {
       {token ? (
         <Popover>
           <PopoverTrigger>
-            <Avatar>
+            <Avatar className="border">
               <AvatarImage src="/sripadilogo.png" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
@@ -48,19 +48,20 @@ export default function NavbarAction() {
             <h4 className="scroll-m-20 mb-1 text-base font-semibold tracking-tight">
               My Account
             </h4>
-            <ul className="flex justify-center border-y flex-col gap-2 py-2">
-              <li className="flex gap-1 text-sm items-center">
-                <User size={20} />
+            <ul className="flex justify-center border-y flex-col gap-4 py-3">
+              <li className="flex gap-2 text-sm items-center">
+                <User size={16} />
                 <Link href="/profile">Profile</Link>
               </li>
-              <li className="flex gap-1 text-sm items-center">
-                <Package size={20} />
-                <p>orders</p>
+              <li className="flex gap-2 text-sm items-center">
+                <Package size={16} />
+                <Link href="/profile/order">Order</Link>
               </li>
             </ul>
             <Button
               className="text-sm mt-4"
               size="sm"
+              variant="ghost"
               onClick={() => handleSignout()}
             >
               <LogOut size={20} className="mr-1" />

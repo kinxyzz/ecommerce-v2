@@ -17,7 +17,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { serverUrl } from "@/lib/static";
 import { useTokenStore } from "@/store/authenticated/store";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2 } from "lucide-react";
+import { KeySquare, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -136,7 +136,9 @@ export default function LoginForm() {
         </div>
         <div className="min-w-72 border-t pt-4">
           <Button asChild className="w-full">
-            <Link href={`${serverUrl}/api/auth/google`}>Login With Google</Link>
+            <Link href={`${serverUrl}/api/auth/google`}>
+              <KeySquare className="mr-2 h-4 w-4" /> Login With Google
+            </Link>
           </Button>
         </div>
       </CardContent>

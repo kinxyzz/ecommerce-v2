@@ -20,8 +20,8 @@ export default function NavMenu({ children }: React.PropsWithChildren) {
     <div className="lg:hidden w-1/3">
       <Sheet open={mounted} onOpenChange={setMounted}>
         <SheetTrigger asChild>
-          <Button size="icon" variant="outline">
-            <Menu size={20} />
+          <Button size="icon" variant="ghost">
+            <Menu size={16} />
           </Button>
         </SheetTrigger>
         <SheetContent side="left">
@@ -30,7 +30,6 @@ export default function NavMenu({ children }: React.PropsWithChildren) {
               <Link href="/">Sripadi Batik</Link>
             </SheetTitle>
           </SheetHeader>
-
           <NavLink mounted={mounted} setMounted={setMounted} hideLarge={true} />
         </SheetContent>
       </Sheet>

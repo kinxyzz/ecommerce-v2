@@ -3,19 +3,34 @@
 import { UseGetCart } from "@/app/hook/useCart";
 import { CreateOrder } from "@/app/hook/useOrder";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
+import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Dispatch, SetStateAction, useState } from "react";
 
-export default function CartCheckout() {
+export default function CartCheckout({
+  setMounted,
+}: {
+  setMounted: Dispatch<SetStateAction<boolean>>;
+}) {
+  const [loading, setLoading] = useState<boolean>(false);
   const { createOrder } = CreateOrder();
   const { myCart = [] } = UseGetCart();
+  const router = useRouter();
+  const { toast } = useToast();
 
-  if (myCart?.length === 0)
-    return <p className="text-muted-foreground text-sm">Your cart is empty</p>;
+  if (myCart?.length === 0) return;
 
   function handlCheckout() {
-    console.log("checkout");
+    setLoading(true);
     createOrder(undefined, {
-      onSuccess: (data) => {
-        console.log(data);
+      onSuccess: () => {
+        setMounted(false);
+        setLoading(false);
+        router.push("/profile/order");
+      },
+      onError(error, variables, context) {
+        setLoading(false);
       },
     });
   }
@@ -29,8 +44,12 @@ export default function CartCheckout() {
       <p className="text-xs text-center font-light text-muted-foreground">
         Shipping, taxes, and discount calculated at checkout
       </p>
-      <Button onClick={() => handlCheckout()} className="w-full">
-        Checkout
+      <Button
+        disabled={loading}
+        onClick={() => handlCheckout()}
+        className="w-full"
+      >
+        {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />} Checkout
       </Button>
     </div>
   );

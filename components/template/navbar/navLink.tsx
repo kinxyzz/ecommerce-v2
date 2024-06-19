@@ -57,7 +57,7 @@ export default function NavLink(props: INavLinkProps) {
         <li
           className={`${
             hideLarge
-              ? "w-full flex items-center  rounded-sm h-12  hover:bg-primary hover:text-white"
+              ? "w-full flex px-2 items-center  rounded-sm h-12  hover:underline hover:bg-primary hover:text-white"
               : ""
           }`}
           key={link.name}
@@ -69,7 +69,7 @@ export default function NavLink(props: INavLinkProps) {
               hideLarge
                 ? ""
                 : "[&:not(:first-child)]:mt-6 underline-offset-4 hover:underline"
-            } font-semibold text-sm duration-300 transition-all ease-in`}
+            } font-semibold text-sm`}
           >
             {link.name}
           </Link>

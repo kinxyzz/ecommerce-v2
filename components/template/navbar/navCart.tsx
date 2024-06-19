@@ -18,8 +18,12 @@ export default function NavCart() {
   return (
     <Sheet open={mounted} onOpenChange={setMounted}>
       <SheetTrigger className="" asChild>
-        <Button variant="outline" size="icon" className="rouned-md">
-          <ShoppingCart size={20} />
+        <Button
+          variant="outline"
+          className="rounded-md w-fit items-center flex p-1 px-2"
+        >
+          <ShoppingCart size={16} className="mr-1" />
+          <p className="text-sm text-muted-foreground">0</p>
         </Button>
       </SheetTrigger>
       <SheetContent className="w-full" side="right">
@@ -29,8 +33,10 @@ export default function NavCart() {
           </SheetTitle>
         </SheetHeader>
         <div className="h-[95%] flex flex-col justify-between">
-          <Cart />
-          <CartCheckout />
+          <div className="flex flex-col">
+            <Cart />
+          </div>
+          <CartCheckout setMounted={setMounted} />
         </div>
       </SheetContent>
     </Sheet>

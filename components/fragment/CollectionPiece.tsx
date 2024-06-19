@@ -75,9 +75,9 @@ export default function CollectionPiece({
           onClick={() => handleCart()}
           size="sm"
           variant={inCart ? "outline" : "default"}
-          className={"text-sm"}
+          className="text-sm"
         >
-          <ShoppingCart size={16} className="mr-3" />
+          <ShoppingCart size={16} className="mr-2" />
           {inCart ? "In Cart" : "To Cart"}
         </Button>
       </CardFooter>
