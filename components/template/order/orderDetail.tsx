@@ -1,6 +1,6 @@
 "use client";
 import { IOrderItems } from "@/@types/interface";
-import { getDetailOrder } from "@/app/hook/useOrder";
+import { GetDetailOrder } from "@/app/hook/useOrder";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { MoveLeft } from "lucide-react";
@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import OrderProductDetail from "./orderProductDetail";
 
 export default function OrderDetail({ id }: { id: string }) {
-  const { order } = getDetailOrder(id);
+  const { order } = GetDetailOrder(id);
   const router = useRouter();
 
   return (
