@@ -15,7 +15,7 @@ export default function Navbar() {
   }
 
   return (
-    <header className="block border-b">
+    <header className="block border-b py-2">
       <nav className="container mx-auto">
         <div className="flex items-center justify-between pt-2">
           <NavMenu />
@@ -31,10 +31,12 @@ export default function Navbar() {
           <NavSearch hideLarge={false} size="large" />
           <NavbarAction />
         </div>
-        <div className="mt-5 mb-3">
-          <NavLink hideLarge={false} />
-          <NavSearch />
-        </div>
+        {!pathname.startsWith("/profile") && (
+          <div className="mt-5 mb-3">
+            <NavLink hideLarge={false} />
+            <NavSearch />
+          </div>
+        )}
       </nav>
     </header>
   );

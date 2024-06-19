@@ -10,6 +10,7 @@ import { ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import Cart from "../cart/Cart";
+import CartCheckout from "../cart/cartCheckout";
 
 export default function NavCart() {
   const [mounted, setMounted] = useState(false);
@@ -21,13 +22,16 @@ export default function NavCart() {
           <ShoppingCart size={20} />
         </Button>
       </SheetTrigger>
-      <SheetContent side="right">
+      <SheetContent className="w-full" side="right">
         <SheetHeader>
           <SheetTitle className="mb-2">
             <Link href="/">Your Cart</Link>
           </SheetTitle>
         </SheetHeader>
-        <Cart />
+        <div className="h-[95%] flex flex-col justify-between">
+          <Cart />
+          <CartCheckout />
+        </div>
       </SheetContent>
     </Sheet>
   );

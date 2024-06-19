@@ -10,7 +10,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { LogIn } from "lucide-react";
+import { LogIn, LogOut, Package, User } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import NavCart from "./navCart";
@@ -45,17 +45,27 @@ export default function NavbarAction() {
             </Avatar>
           </PopoverTrigger>
           <PopoverContent className="w-fit">
-            <ul className="flex justify-center flex-col gap-4 pt-4 px-2">
-              <li className="border-b">
-                <Link href="#">Profile</Link>
+            <h4 className="scroll-m-20 mb-1 text-base font-semibold tracking-tight">
+              My Account
+            </h4>
+            <ul className="flex justify-center border-y flex-col gap-2 py-2">
+              <li className="flex gap-1 text-sm items-center">
+                <User size={20} />
+                <Link href="/profile">Profile</Link>
               </li>
-              <li className="border-b">
-                <p>Setting</p>
-              </li>
-              <li className="border-b">
-                <Button onClick={() => handleSignout()}>Logout</Button>
+              <li className="flex gap-1 text-sm items-center">
+                <Package size={20} />
+                <p>orders</p>
               </li>
             </ul>
+            <Button
+              className="text-sm mt-4"
+              size="sm"
+              onClick={() => handleSignout()}
+            >
+              <LogOut size={20} className="mr-1" />
+              Logout
+            </Button>
           </PopoverContent>
         </Popover>
       ) : (

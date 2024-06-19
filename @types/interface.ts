@@ -37,3 +37,29 @@ export interface ICartList<T, N> {
     price: T;
   };
 }
+
+export interface IOrderItems {
+  id: number;
+  order_id: number;
+  name: string;
+  price: number;
+  quantity: number;
+  product_id: number;
+  product: {
+    name: string;
+    image: string;
+    description: string;
+  };
+}
+
+export interface IOrderCardProps {
+  order_id: number;
+  status: string;
+  user_id: string;
+  totalPrice: number;
+  user: {
+    username: string;
+    email: string;
+  };
+  orderItems: IOrderItems[];
+}
