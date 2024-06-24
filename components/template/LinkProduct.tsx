@@ -18,7 +18,7 @@ export default function LinkProduct() {
       variants={fadeIn("down", 0.5)}
       initial="hidden"
       whileInView={"show"}
-      viewport={{ once: true, amount: 1 }}
+      viewport={{ once: true, amount: 0.7 }}
       className="flex justify-between flex-wrap md:flex-nowrap items-center gap-4 mt-12 w-full"
     >
       <Card>
