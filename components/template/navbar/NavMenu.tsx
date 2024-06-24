@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import {
   Sheet,
   SheetContent,
@@ -14,9 +13,14 @@ import Link from "next/link";
 import { useState } from "react";
 import NavLink from "./navLink";
 
-export default function NavMenu() {
+export default function NavMenu({
+  showSearch,
+  setShowSearch,
+}: {
+  showSearch: boolean;
+  setShowSearch: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   const [mounted, setMounted] = useState(false);
-  const [showSearch, setShowSearch] = useState(false);
 
   return (
     <>
@@ -44,11 +48,6 @@ export default function NavMenu() {
           <Search size={16} />
         </Button>
       </div>
-      {showSearch && (
-        <div className="fixed top-16 h-fit z-50">
-          <Input type="text" placeholder="search" />
-        </div>
-      )}
     </>
   );
 }

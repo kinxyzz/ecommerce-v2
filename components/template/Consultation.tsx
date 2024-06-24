@@ -3,10 +3,12 @@
 import { fadeIn } from "@/lib/variants";
 import { motion } from "framer-motion";
 import { CircleHelp, Instagram } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
 
 export default function Consultation() {
+  const router = useRouter();
   return (
     <motion.div
       variants={fadeIn("down", 0.5)}
@@ -28,9 +30,11 @@ export default function Consultation() {
           batik yang sempurna untuk Anda.
         </CardContent>
         <CardFooter>
-          <Button type="button">
-            <CircleHelp className="mr-3" />
-            Konsultasikan Sekarang
+          <Button asChild>
+            <a href="https://wa.me/085280189027" target="_blank">
+              <CircleHelp className="mr-3" />
+              Konsultasikan Sekarang
+            </a>
           </Button>
         </CardFooter>
       </Card>
@@ -47,8 +51,10 @@ export default function Consultation() {
           kami
         </CardContent>
         <CardFooter>
-          <Button type="button">
-            <Instagram className="mr-3" /> Follow Instagram
+          <Button asChild type="button">
+            <a href="https://www.instagram.com/batiksripadi/">
+              <Instagram className="mr-3" /> Follow Instagram
+            </a>
           </Button>
         </CardFooter>
       </Card>

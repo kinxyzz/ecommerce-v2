@@ -4,9 +4,11 @@ import { fadeIn } from "@/lib/variants";
 import { motion } from "framer-motion";
 import { Images } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 
 export default function Hero() {
+  const router = useRouter();
   return (
     <motion.div
       variants={fadeIn("down", 0.5)}
@@ -15,13 +17,13 @@ export default function Hero() {
       viewport={{ once: true, amount: 0.7 }}
       className="relative after:absolute overflow-hidden after:inset-0 after:bg-gradient-to-t from-5% via-black/20 via-30% from-background  to-transparent rounded-md  h-[35rem] flex w-full mt-4"
     >
-      <div className="  rounded-md">
+      <div className=" w-full  rounded-md">
         <Image
           src="/hero.jpg"
           alt="Photo by Drew Beamer"
-          width={1000}
+          width={2000}
           height={1000}
-          className="brightness-75 h-[99%] border-none object-cover"
+          className="brightness-75 h-[99%] w-full border-none object-cover"
         />
       </div>
       <div className="absolute z-50 text-slate-50 flex h-full gap-4">
@@ -37,7 +39,7 @@ export default function Hero() {
             </blockquote>
           </div>
           <div className="mt-8">
-            <Button>
+            <Button onClick={() => router.push("/products")}>
               <Images className="mr-4" />
               Koleksi Terbaru
             </Button>

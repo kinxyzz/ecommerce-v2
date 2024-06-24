@@ -3,7 +3,6 @@
 import { UseGetCart } from "@/app/hook/useCart";
 import { CreateOrder } from "@/app/hook/useOrder";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/components/ui/use-toast";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction, useState } from "react";
@@ -17,7 +16,11 @@ export default function CartCheckout({
   const { createOrder } = CreateOrder();
   const { myCart = [] } = UseGetCart();
   const router = useRouter();
-  const { toast } = useToast();
+  const totalPrice = myCart?.reduce(
+    (acc: number, curr: { product: { price: number } }) =>
+      acc + curr.product.price,
+    0
+  );
 
   if (myCart?.length === 0) return;
 
@@ -39,7 +42,12 @@ export default function CartCheckout({
     <div className="flex justify-center items-center gap-4 flex-col">
       <div className="flex w-full text-sm justify-between">
         <p>Subtotal</p>
-        <p>$250.00</p>
+        <p>
+          {totalPrice.toLocaleString("id-ID", {
+            style: "currency",
+            currency: "IDR",
+          })}
+        </p>
       </div>
       <p className="text-xs text-center font-light text-muted-foreground">
         Shipping, taxes, and discount calculated at checkout

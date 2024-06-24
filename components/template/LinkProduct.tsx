@@ -10,9 +10,11 @@ import {
 import { fadeIn } from "@/lib/variants";
 import { motion } from "framer-motion";
 import { ChevronRight } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 
 export default function LinkProduct() {
+  const router = useRouter();
   return (
     <motion.div
       variants={fadeIn("down", 0.5)}
@@ -33,7 +35,7 @@ export default function LinkProduct() {
           </p>
         </CardContent>
         <CardFooter className="flex justify-end">
-          <Button>
+          <Button onClick={() => router.push("/products?material=katun")}>
             Show More <ChevronRight className="ml-3" />
           </Button>
         </CardFooter>
@@ -53,7 +55,7 @@ export default function LinkProduct() {
           </p>
         </CardContent>
         <CardFooter className="flex justify-end">
-          <Button>
+          <Button onClick={() => router.push("/products?material=sutra")}>
             Show More <ChevronRight className="ml-3" />
           </Button>
         </CardFooter>

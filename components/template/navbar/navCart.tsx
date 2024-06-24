@@ -1,3 +1,6 @@
+"use client";
+
+import { UseGetCart } from "@/app/hook/useCart";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -13,6 +16,8 @@ import Cart from "../cart/Cart";
 import CartCheckout from "../cart/cartCheckout";
 
 export default function NavCart() {
+  const { myCart = [] } = UseGetCart();
+
   const [mounted, setMounted] = useState(false);
 
   return (
@@ -23,7 +28,7 @@ export default function NavCart() {
           className="rounded-md w-fit items-center flex p-1 px-2"
         >
           <ShoppingCart size={16} className="mr-1" />
-          <p className="text-sm text-muted-foreground">0</p>
+          <p className="text-sm text-muted-foreground">{myCart?.length || 0}</p>
         </Button>
       </SheetTrigger>
       <SheetContent className="w-full" side="right">
