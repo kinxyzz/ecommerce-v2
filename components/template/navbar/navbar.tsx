@@ -34,7 +34,7 @@ export default function Navbar() {
         {!pathname.startsWith("/profile") && (
           <div className="mt-5 mb-3">
             <NavLink hideLarge={false} />
-            <NavSearch />
+            {/* <NavSearch /> */}
           </div>
         )}
       </nav>

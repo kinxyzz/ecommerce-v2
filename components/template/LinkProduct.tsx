@@ -1,3 +1,4 @@
+"use client";
 import {
   Card,
   CardContent,
@@ -6,12 +7,20 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { fadeIn } from "@/lib/variants";
+import { motion } from "framer-motion";
 import { ChevronRight } from "lucide-react";
 import { Button } from "../ui/button";
 
 export default function LinkProduct() {
   return (
-    <div className="flex justify-between flex-wrap md:flex-nowrap items-center gap-4 mt-12 w-full">
+    <motion.div
+      variants={fadeIn("down", 0.5)}
+      initial="hidden"
+      whileInView={"show"}
+      viewport={{ once: true, amount: 1 }}
+      className="flex justify-between flex-wrap md:flex-nowrap items-center gap-4 mt-12 w-full"
+    >
       <Card>
         <CardHeader>
           <CardTitle>Kain Batik Katun</CardTitle>
@@ -29,6 +38,7 @@ export default function LinkProduct() {
           </Button>
         </CardFooter>
       </Card>
+
       <Card>
         <CardHeader>
           <CardTitle>Kain Batik Sutra</CardTitle>
@@ -48,6 +58,6 @@ export default function LinkProduct() {
           </Button>
         </CardFooter>
       </Card>
-    </div>
+    </motion.div>
   );
 }

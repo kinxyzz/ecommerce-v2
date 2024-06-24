@@ -1,12 +1,20 @@
 "use client";
 
+import { fadeIn } from "@/lib/variants";
+import { motion } from "framer-motion";
 import { CircleHelp, Instagram } from "lucide-react";
 import { Button } from "../ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
 
 export default function Consultation() {
   return (
-    <div className="flex flex-wrap gap-8 mt-12">
+    <motion.div
+      variants={fadeIn("down", 0.5)}
+      initial="hidden"
+      whileInView={"show"}
+      viewport={{ once: true, amount: 1 }}
+      className="flex flex-wrap gap-8 mt-12"
+    >
       <Card className="flex-1">
         <CardHeader>
           <h3 className="scroll-m-20 text-xl font-semibold tracking-tight">
@@ -44,6 +52,6 @@ export default function Consultation() {
           </Button>
         </CardFooter>
       </Card>
-    </div>
+    </motion.div>
   );
 }
